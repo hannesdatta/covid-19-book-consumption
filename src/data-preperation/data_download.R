@@ -8,12 +8,12 @@ library(googledrive)
 #### DATA DOWNLOAD #####
 #########################
 #create the data folder
-dir.create("../../data/")
-
+dir.create("../../data")
+drive_deauth()
 
 #download and save users_re_scrape.csv
 data_id <-"1olIXw6-RvB0E3Ziygs9Hy7YnLVtD-gN8" #the id of the dataset
-drive_download(as_id(data_id), path = "users_re_scrape.csv", overwrite = TRUE) #download the data from the drive
+drive_download(as_id(data_id), path = "../../data/users_re_scrape.csv", overwrite = TRUE) #download the data from the drive
 users_re_scrape<-fread("users_re_scrape.csv", sep=";") #save the data in a dataframe
 write.csv2(users_re_scrape, "../../data/users_re_scrape.csv") #save the data to csv
 
@@ -21,15 +21,15 @@ write.csv2(users_re_scrape, "../../data/users_re_scrape.csv") #save the data to 
 #download and save stringency_index.csv
 data_id <-"1GfYDmtlDK1WaGJ4cQaV0sT7tiq5UoeKS" #the id of the dataset
 drive_download(as_id(data_id), path = "stringency_index.csv", overwrite = TRUE) #download the data from the drive
-stringency_index<-fread("stringency_index.csv", sep=",") #save the data in a dataframe
-write.csv2(stringency_index, "../../data/stringency_index.csv") #save the data to csv
+stringency_index<-fread("../../data/stringency_index.csv", sep=",") #save the data in a dataframe
+#write.csv2(stringency_index, "../../data/stringency_index.csv") #save the data to csv
 
 
 #download and save books_re_scrape.csv
 data_id <-"1W9mr826Dh_q2I4EqDj7__Ey0GhiXudMT" #the id of the dataset
 drive_download(as_id(data_id), path = "books_re_scrape.csv", overwrite = TRUE) #download the data from the drive
-books_re_scrape<-fread("books_re_scrape.csv", sep=";") #save the data in a dataframe
-write.csv2(books_re_scrape, "../../data/books_re_scrape.csv") #save the data to csv
+books_re_scrape<-fread("../../data/books_re_scrape.csv", sep=";") #save the data in a dataframe
+#write.csv2(books_re_scrape, "../../data/books_re_scrape.csv") #save the data to csv
 
 
 #download and save all_users.csv

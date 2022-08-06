@@ -12,7 +12,7 @@ library("lubridate")
 ### COVID Data Prepare ##
 #########################
 # load the data
-covid_stringency<-fread("../../data/stringency_index.csv", dec=',' ) #save the data in a dataframe
+covid_stringency<-fread("../../data/stringency_index.csv", dec=',', header = TRUE ) #save the data in a dataframe
 user_info<- fread("../../gen/temp/users_cleaned.csv")
 
 # remove columns that we will not ues:

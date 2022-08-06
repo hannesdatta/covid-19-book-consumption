@@ -56,14 +56,7 @@ all_books$dummy<-1
 info_book_based<-all_books %>% group_by(`reader id`) %>% summarise(books = sum(dummy))
 
 user_info$Nr_Books_in_data<-0
-for (user in 1:nrow(info_book_based)){
-  userid<-info_book_based[user,1]
-  
-  user_info[which(user_info$user_id==as.character(userid)), 'Nr_Books_in_data'] <- as.numeric(info_book_based[user,2])
-  
-}
-
-
+left_join(user_info, info_book_based, by = character())
 # do the check (below element should end up with 0 rows):
 users_dismatch<- user_info %>% mutate(diff = Nr_Books_in_data - Nr_Books_scraped) %>% filter(!(diff ==0))
 nrow(users_dismatch)

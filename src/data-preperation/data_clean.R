@@ -157,15 +157,15 @@ summary(all_books)
 
 
 # check the dates for values that are not possible
-all_books<-all_books %>% mutate(date_started = fifelse(date_started<"1901-01-01" | date_started>"2022-5-5", as.Date(NA), date_started))
-all_books<-all_books %>% mutate(date_started_month = fifelse(date_started_month<"1901-01-01" | date_started_month>"2022-5-5", as.Date(NA), date_started_month))
+#all_books<-all_books %>% mutate(date_started = fifelse(date_started<"1901-01-01" | date_started>"2022-5-5", as.Date(NA), date_started))
+#all_books<-all_books %>% mutate(date_started_month = fifelse(date_started_month<"1901-01-01" | date_started_month>"2022-5-5", as.Date(NA), date_started_month))
 
 
-all_books<-all_books %>% mutate(date_read = fifelse(date_read<"1901-01-01" | date_read>"2022-5-5", as.Date(NA), date_read))
-all_books<-all_books %>% mutate(date_read_month = fifelse(date_read_month<"1901-01-01" | date_read_month>"2022-5-5", as.Date(NA), date_read_month))
+#all_books<-all_books %>% mutate(date_read = fifelse(date_read<"1901-01-01" | date_read>"2022-5-5", as.Date(NA), date_read))
+#all_books<-all_books %>% mutate(date_read_month = fifelse(date_read_month<"1901-01-01" | date_read_month>"2022-5-5", as.Date(NA), date_read_month))
 
-all_books<-all_books %>% mutate(date_pub = fifelse(date_pub>"2022-5-5", as.Date(NA), date_pub))
-all_books<-all_books %>% mutate(year_pub = fifelse(year_pub>2022, as.numeric(NA), year_pub))
+#all_books<-all_books %>% mutate(date_pub = fifelse(date_pub>"2022-5-5", as.Date(NA), date_pub))
+#all_books<-all_books %>% mutate(year_pub = fifelse(year_pub>2022, as.numeric(NA), year_pub))
 
 # We find out that 1500 records have a negative read time. 
 # After inspecting a sample of these records, it seems that this is an issue that occurs if a reader adds a book for the second time bus does not (correctly) register both start and end dates.

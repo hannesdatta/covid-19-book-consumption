@@ -19,8 +19,8 @@ all_books <-fread("../../gen/temp/books_cleaned.csv")
 all_books<- all_books %>% select (-V1) #remove variable we won't be using
 
 # test on random sample
-#set.seed(123)
-#all_books<- all_books %>% slice_sample(n = 10000)
+set.seed(123)
+all_books<- all_books %>% slice_sample(n = 10000)
 ################################################################################
 # create a variable that represents the first day of the week of the week in which the book was added, such that we can later aggregate on a weekly level:
 all_books$first_day_of_week_added<- floor_date(as.Date(all_books$date_added, "%Y-%m/-%d"), unit="week", week_start = 1)
@@ -90,7 +90,7 @@ weekly_per_user_complete<- weekly_per_user_complete %>% replace(is.na(.), 0)
 
 
 #add if the reader is a fanatic reader:
-#user_info<-user_info %>% select(-V1) #already removed this column in the beginning
+user_info<-user_info %>% select(-V1) #already removed this column in the beginning
 
 user_info <- user_info %>% mutate(fanatic=ifelse(books_per_day*7>1 & days_active>365, 1, 0))
 info_to_add<-user_info %>% select(user_id, fanatic)

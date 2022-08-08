@@ -24,8 +24,8 @@ user_info<-user_info %>% select(-V1)
 #only keep the records with a date started
 all_books<- all_books %>% filter(!is.na(date_started))
 
-#set.seed(123)
-#all_books<- all_books %>% slice_sample(n = 10000)
+set.seed(123)
+all_books<- all_books %>% slice_sample(n = 10000)
 ################################################################################
 # create a variable that represents the first day of the week of the week in which the book was started, such that we can later aggregate on a weekly level:
 all_books$first_day_of_week_started<- floor_date(as.Date(all_books$date_started, "%Y-%m/-%d"), unit="week", week_start = 1)

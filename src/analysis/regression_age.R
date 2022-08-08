@@ -21,8 +21,8 @@ user_info<-user_info %>% select(-V1)
 
 
 # test on random sample
-#set.seed(123)
-#all_books<- all_books %>% slice_sample(n = 10000)
+set.seed(123)
+all_books<- all_books %>% slice_sample(n = 10000)
 ################################################################################
 # create a variable that represents the first day of the week of the week in which the book was added, such that we can later aggregate on a weekly level:
 all_books$first_day_of_week_added<- floor_date(as.Date(all_books$date_added, "%Y-%m/-%d"), unit="week", week_start = 1)

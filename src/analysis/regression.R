@@ -17,8 +17,12 @@ user_info<- fread("../../gen/temp/users_cleaned.csv")
 all_books <-fread("../../gen/temp/books_cleaned.csv") 
 
 all_books<- all_books %>% select (-V1) #remove variable we won't be using
+
+# For testing purpose: take a random sample of all_books data
+set.seed(123)
+all_books<- all_books %>% slice_sample(n = 10000)
 ################################################################################
-# create a variable that represents the first day of the week of the week in which the book was added, such that we can later aggregate on a weekly level:
+# create a variable that represents the first day of the week  in which the book was added, such that we can later aggregate on a weekly level:
 all_books$first_day_of_week_added<- floor_date(as.Date(all_books$date_added, "%Y-%m/-%d"), unit="week", week_start = 1)
 all_books$first_day_of_week_added <- as.Date(all_books$first_day_of_week_added)
 
@@ -38,8 +42,9 @@ df_col_names<-c("date", "user")
 weekly_per_user_complete<- data.frame(as.Date("2022-01-01"),NA)
 names(weekly_per_user_complete)<-df_col_names
 
-
+# make the loop below more efficient i.e. less time consuming?
 #loop from the first till the last day:
+start_time <- Sys.time()
 count=1
 
 for (user in first_day_per_user$`reader id`){
@@ -52,6 +57,8 @@ for (user in first_day_per_user$`reader id`){
   weekly_per_user_complete<-rbind(weekly_per_user_complete,days_of_interest)
   
 }
+
+end_time <- Sys.time()
 
 
 #add the number of books read each week
@@ -149,7 +156,7 @@ write.csv2(as.data.frame(summary(regression_days)$coefficients), file = "../../g
 weekly_per_country<- days_per_user %>% group_by(first_day_of_week_added,Country) %>% summarise(days = mean(days),covid=mean(value) )
 weekly_per_country$week<-as.character(week(weekly_per_country$first_day_of_week_added))
 
-regression_days <- lm(log(days)~ covid+week+first_day_of_week_added+Country, weekly_per_country)
+regression_days <- lm(log(days + 1)~ covid+week+first_day_of_week_added+Country, weekly_per_country)
 summary(regression_days)
 write.csv2(as.data.frame(summary(regression_days)$coefficients), file = "../../gen/output/model1b_days.csv", fileEncoding = "UTF-8")
 
@@ -292,8 +299,10 @@ weekly_per_country<- weekly_per_country %>% replace(is.na(.), 0)
 
 
 weekly_per_country$week<-as.character(week(weekly_per_country$first_day_of_week_added))
+# remove 0's before log transformation in reg // alternatively, perform log x + 1 in reg eq: 
+#weekly_per_country<- filter(weekly_per_country, nostalgic > 0)
 
-regression_nostalgic <- lm(log(nostalgic)~ value+week+first_day_of_week_added+Country, weekly_per_country)
+regression_nostalgic <- lm(log(nostalgic + 1)~ value+week+first_day_of_week_added+Country, weekly_per_country)
 summary(regression_nostalgic)
 write.csv2(as.data.frame(summary(regression_nostalgic)$coefficients), file = "../../gen/output/model1b_nostalgic.csv", fileEncoding = "UTF-8")
 ################################################################################
@@ -344,7 +353,7 @@ weekly_per_country<- weekly_per_country %>% replace(is.na(.), 0)
 
 weekly_per_country$week<-as.character(week(weekly_per_country$first_day_of_week_added))
 
-regression_recent <- lm(log(recent)~ value+week+first_day_of_week_added+Country, weekly_per_country)
+regression_recent <- lm(log(recent+1)~ value+week+first_day_of_week_added+Country, weekly_per_country)
 summary(regression_recent)
 write.csv2(as.data.frame(summary(regression_recent)$coefficients), file = "../../gen/output/model1b_recent.csv", fileEncoding = "UTF-8")
 

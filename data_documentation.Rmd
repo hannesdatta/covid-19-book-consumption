@@ -1,6 +1,8 @@
 ---
 title: "data_documentation"
-output: pdf_document
+output:
+  html_document:
+    df_print: paged
 date: "2022-08-23"
 ---
 # General Q&A
@@ -35,7 +37,7 @@ The time taken to scrape data for 31 country-specific subgroups was limited to f
 
 Goodreads limits the number of members that can be viewed to 3000. This issue was addressed by automating the process with a Python while-loop that searches for letters and letter combinations until at least 99% of a group’s members are collected and no new users are discovered. 
 
-- Were any observations excluded? If yes, under what premise?
+- Were any observations excluded? 
 
 Private users and users with zero books on their bookshelves were excluded.
 
@@ -71,7 +73,7 @@ The OxCGRT stringency index is used. This index aggregates the stringency of eig
 
 Dataset name: books_cleaned.csv
 
-Short description: 
+Short description: This is the final dataset containing book level data
 
 Row count: `14848458`
 
@@ -93,7 +95,7 @@ Column names with description:
 | avg_rating | the average rating score that the book received by other readers, ranging from 0 to 5 |  |
 | num_ratings | the number of times the read book has been rated by other readers |  |
 | date_pub | the exact date when the book was published |  |
-| read_count | the number of times this book was read by the user ( doubt?) |  |
+| read_count | the number of times this book was read by the user  |  |
 | dummy |  | what does this indicate? |
 | date_started_month |  | how is this computed? |
 | date_read_month |  | same as above |
@@ -107,7 +109,7 @@ Column names with description:
 
 Dataset name: users_cleaned.csv
 
-Short description: 
+Short description: This is the final dataset containing user level data
 
 Row count: `99641`
 
@@ -121,24 +123,24 @@ Column names with description:
 | --- | --- | --- |
 | Nrments |  |  |
 | Country | the country subgroup the user is a member of. If one is a member of multiple country groups, this variable is set to “unclear”. |  |
-| Nr.Ratings | ?? |  |
+| Nr.Ratings | no.of ratings given by the specific user to all the books in the bookshelf in total | |
 | Avg.Rating | the average rating the user has given to the books on their shelf; this value ranges from 0 to 5 |  |
-| Nr.Reviews | ?? |  |
+| Nr.Reviews | no.of reviews given by the specific user to all the books in the bookshelf in total | |
 | Nr.Books.Read | the number of books on the user’s bookshelf |  |
-| Nr.Friends |  |  |
-| user_id |  |  |
+| Nr.Friends | the no. of friends on the user's profile |  |
+| user_id | unique ID of the user |  |
 | Age | self-reported age of the user |  |
 | Male | gender dummy where 1=male and 0=female |  |
 | Joined | the month and year in which the user joined Goodreads |  |
 | Last | the month and year the user was last active on Goodreads |  |
-| days_active |  | how is it op? |
-| books_per_day |  | how? |
-| totalbooks_left | ?? | how op? |
-| dummy | ?? |  |
+| days_active |  | how is it computed? |
+| books_per_day |  | how is it computed? |
+| totalbooks_left |  | how is it computed? |
+| dummy |  | what does this variable indicate? |
 
 Dataset name: covid_stringency_prepared.csv
 
-Short description: 
+Short description: This dataset contains info on the OxCGRT stringency index for 31 countries
 
 Row count: 105
 
@@ -149,7 +151,7 @@ Size of dataset: 29.7 KB
 Column names with description:
 | variable | description |
 | --- | --- |
-| first_day_of_week |  |
+| first_day_of_week | what does this indicate? |
 | United Arab Emirates |  |
 | Argentina |  |
 | Australia |  |

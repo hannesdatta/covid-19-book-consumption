@@ -1,0 +1,84 @@
+---
+title: "data_documentation"
+output: pdf_document
+date: "2022-08-23"
+---
+# General Q&A
+
+- What is the data source and the motivation behind the same?
+
+To examine the impact of COVID-19 restrictions on book consumption, book reading data was collected from Goodreads. 
+
+Goodreads is the world’s largest book reading community, with 125 million registered users as of 2022. The website was launched in January 2007. 
+
+- How was the data obtained?
+
+The data was web scraped from the Goodreads web site using Python’s “requests” package and the scraped data from each page is transformed into a useful list of information using the “beautifulsoup” package. 
+
+- On what basis were the users/observations selected ?
+
+The users were collected from country-specific subgroups on Goodreads. This allows for coverage of a wider variety of users simultaneously and provide an indication of the country where each user lives. This enables one to match users to the country-specific COVID-19 pandemic measures they likely faced. Also, here it is assumed that a user’s country group is most likely the country where the user lives.
+
+- How many country-specific groups were chosen?
+
+A total of 31 largest country-specific subgroups were selected with at least 100 members.
+
+- On what basis was a particular subgroup chosen ?
+
+While for many countries there are multiple groups, this study includes only groups with the highest number of members. 
+
+- What was the total duration of the data collection process?
+
+The time taken to scrape data for 31 country-specific subgroups was limited to four months. 
+
+- What were some limitations in the data collection process(if any)? How is it addressed?
+
+Goodreads limits the number of members that can be viewed to 3000. This issue was addressed by automating the process with a Python while-loop that searches for letters and letter combinations until at least 99% of a group’s members are collected and no new users are discovered. 
+
+- Were any observations excluded? If yes, under what premise?
+
+Private users and users with zero books on their bookshelves were excluded.
+
+- Were there any missing data?
+    - 58.8% of books have no date started
+    - 49.9% of books have no date finished
+    - Published date is missing for 39.9% and year published is missing for 6% of books
+    - Rating is missing for 13.5% of books
+    
+- Were there any outliers/infeasible data?
+    - Age: Observations with age under 18 and over 99 were removed, as it is assumed that people of such an high age are not likely to use Goodreads and Goodreads automatically sets the profiles of underaged(below 18) users to private.
+    - Start and finish dates of books: The acceptable dates are limited to 70 years before Goodreads was founded(1-1-1937) and until the last book was scraped(5-5-2022). All observations outside this range are removed.
+    - Post scraping date: Since the scraping process began on Jan 1, 2022, all data uploaded after this data was removed to avoid collecting biased data for users that were scraped relatively early opposed to those scraped at the end of scraping period.
+    - No. of pages: Book length exceeding 10,000 and those with 0 pages are removed.
+    - First day of activity: When one registers with Goodreads, the site asks you to enter all books you have read before which might result in high number of books added on the first day of activity. Hence, these observations are removed.
+- What are the final number of observations for users and book data collected?
+
+99,641 unique users and 14,848,487 book reading records.
+
+- What is the level of aggregation of the data?
+
+Data is aggregated on a weekly level to remove the effect that different days of the week could have on book reading.
+
+- How were the COVID-19 restrictions operationalized?
+
+The OxCGRT stringency index is used. This index aggregates the stringency of eight frequently used containment and closure policies and the presence of COVID-19 information compaigns into a number of 0 and 100. For all weeks prior to Jan 1, 2020, the COVID-19 stringency index is set to 0.
+
+# Directory structure
+[ add screenshot manually on git later]
+
+# (Final) Data composition 
+
+Dataset name: books_cleaned.csv
+
+Short description: 
+
+Row count: `14848458`
+
+Column count: 23
+
+Size of dataset: 2.3 GB
+
+Column names with description:
+
+[ add manually on git]
+

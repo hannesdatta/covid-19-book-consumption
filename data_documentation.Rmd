@@ -64,7 +64,8 @@ Data is aggregated on a weekly level to remove the effect that different days of
 The OxCGRT stringency index is used. This index aggregates the stringency of eight frequently used containment and closure policies and the presence of COVID-19 information compaigns into a number of 0 and 100. For all weeks prior to Jan 1, 2020, the COVID-19 stringency index is set to 0.
 
 # Directory structure
-[ add screenshot manually on git later]
+
+<img width="1056" alt="data-documentation" src="https://user-images.githubusercontent.com/67949747/186224463-47dd7e35-8d20-4769-80d6-7ef8fbf1a679.png">
 
 # (Final) Data composition 
 
@@ -80,5 +81,106 @@ Size of dataset: 2.3 GB
 
 Column names with description:
 
-[ add manually on git]
+| variable | description | questions |
+| --- | --- | --- |
+| reader id | unique ID of the user |  |
+| book url | URL to the book |  |
+| date_started | the optional user-added date of when the user started reading the book  | max = 3645-02-02 how? |
+| date_read | the optional user-added date of when the user finished reading the book | 3645-02-02 how is max so big? |
+| date_added | the system-generated date of when the user added this book to their read shelf |  |
+| user rating | the rating score the user assigned to this book, ranging from 1 to 5 |  |
+| num_pages | the number of pages in the book |  |
+| avg_rating | the average rating score that the book received by other readers, ranging from 0 to 5 |  |
+| num_ratings | the number of times the read book has been rated by other readers |  |
+| date_pub | the exact date when the book was published |  |
+| read_count | the number of times this book was read by the user ( doubt?) |  |
+| dummy |  | what does this indicate? |
+| date_started_month |  | how is this computed? |
+| date_read_month |  | same as above |
+| year_pub | the year the book was published |  |
+| read_time_days |  | how is this computed? |
+| read_time_months |  | how is this computed? |
+| age_of_book |  | how is this computed? |
+| nostalgic | the number of books with a publication year 10 to 80 years before the date added, divided by the number of books added in a week. This variable is only based on the books for which the publication year is available |  |
+| age_of_book_exact |  | how is this computed |
+| recent |  | how is this computed? |
+
+Dataset name: users_cleaned.csv
+
+Short description: 
+
+Row count: `99641`
+
+Column count: 18
+
+Size of dataset: 11.7 MB
+
+Column names with description:
+
+| variable | description |  |
+| --- | --- | --- |
+| Nrments |  |  |
+| Country | the country subgroup the user is a member of. If one is a member of multiple country groups, this variable is set to “unclear”. |  |
+| Nr.Ratings | ?? |  |
+| Avg.Rating | the average rating the user has given to the books on their shelf; this value ranges from 0 to 5 |  |
+| Nr.Reviews | ?? |  |
+| Nr.Books.Read | the number of books on the user’s bookshelf |  |
+| Nr.Friends |  |  |
+| user_id |  |  |
+| Age | self-reported age of the user |  |
+| Male | gender dummy where 1=male and 0=female |  |
+| Joined | the month and year in which the user joined Goodreads |  |
+| Last | the month and year the user was last active on Goodreads |  |
+| days_active |  | how is it op? |
+| books_per_day |  | how? |
+| totalbooks_left | ?? | how op? |
+| dummy | ?? |  |
+
+Dataset name: covid_stringency_prepared.csv
+
+Short description: 
+
+Row count: 105
+
+Column count: 34
+
+Size of dataset: 29.7 KB
+
+Column names with description:
+| variable | description |
+| --- | --- |
+| first_day_of_week |  |
+| United Arab Emirates |  |
+| Argentina |  |
+| Australia |  |
+| Austria |  |
+| Bangladesh |  |
+| Bulgaria |  |
+| Egypt |  |
+| Estonia |  |
+| Finland |  |
+| United Kingdom |  |
+| Indonesia |  |
+| India |  |
+| Italy |  |
+| Lithuania |  |
+| Latvia |  |
+| Mexico |  |
+| Malaysia |  |
+| Netherlands |  |
+| Norway |  |
+| Nepal |  |
+| Pakistan |  |
+| Panama |  |
+| Philippines |  |
+| Poland |  |
+| Portugal |  |
+| Romania |  |
+| Russia |  |
+| Singapore |  |
+| Sweden |  |
+| Turkey |  |
+| Venezuela |  |
+| Average |  |
+
 

@@ -185,4 +185,14 @@ Column names with description:
 | Venezuela |  |
 | Average |  |
 
+# Variable Operationalization
+| Dimension | Variable | Operationalisation |
+| --- | --- | --- |
+| Quantity | No. of books added | The total no. of books added in a week by a user. For each user, this variable is computed for each week between their first and last activity |
+| Speed | No. of days per book | The no. of days it took on average to finish the books added to the shelf. The no. of days per book is the no. of days from date started reading to date finished reading. This variable only includes books finished within one year to exclude those who started reading a book again that they started years ago |
+| Satisfaction | Average rating per book | The average rating of the added books in a week. This variable is only based on the books that were rated by the user |
+| Book charactersitics | Percentage nostalgic books | The no. of books with a publication year 10 to 80 years before the date added, divided by the number of books added in a week |
+|  | Percentage recent publications | The no. of books with a publication date less than one year from the date added, divided by the number of books added in a week.  |
+|  | Number of pages per book | The average no. of pages per added book.  |
+
 

@@ -47,18 +47,28 @@ names(weekly_per_user_complete)<-df_col_names
 start_time <- Sys.time()
 count=1
 
-for (user in first_day_per_user$`reader id`){
-  count<-count+1
-  first_day<-first_day_per_user[which(first_day_per_user$`reader id`==user), 2]
-  last_day<-last_day_per_user[which(last_day_per_user$`reader id`==user),2]
-  days_of_interest<-as.data.frame(seq(as.Date(pull(first_day[1,1])), as.Date(pull(last_day[1,1])), by="weeks"))
-  days_of_interest$user<-user
-  names(days_of_interest)<-df_col_names
-  weekly_per_user_complete<-rbind(weekly_per_user_complete,days_of_interest)
-  
-}
+(days_per_user<-weekly_per_user %>% group_by(`reader id`) %>% summarise(first=min(first_day_of_week_added),
+                                                                            last=max(first_day_of_week_added)))
+
+empty_df = data.table(date=seq(from=min(days_per_user$first), to=max(days_per_user$last),by='1 day'))
+empty_df[, fake_merge:=1]
+
+empty_users = data.table(user = unique(days_per_user$`reader id`))[, fake_merge:=1]
+
+weekly_per_user_complete=merge(empty_users, empty_df, by=c('fake_merge'), allow.cartesian=T)
+
+dt_days_per_user = data.table(days_per_user)
+setkey(dt_days_per_user, `reader id`)
+setkey(weekly_per_user_complete, user)
+weekly_per_user_complete[dt_days_per_user, ':=' (first=i.first, last=i.last)]
+
+weekly_per_user_complete <- weekly_per_user_complete[date>=first & date <= last]
+
+gc()
+
 
 end_time <- Sys.time()
+
 
 
 #add the number of books read each week

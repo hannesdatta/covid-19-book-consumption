@@ -18,6 +18,10 @@ all_books <-fread("../../gen/temp/books_cleaned.csv")
 
 #remove the columns we do not need
 all_books<- all_books %>% select (-V1)
+
+# test on random sample
+set.seed(123)
+all_books<- all_books %>% slice_sample(n = 10000)
 ################################################################################
 # create an overview of number of books added per week globally 
 
